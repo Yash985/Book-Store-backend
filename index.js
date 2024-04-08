@@ -17,12 +17,22 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/all", async(req, res) => {
+app.get("/all", async (req, res) => {
   try {
     const allBooks = await Book.find({});
     res.status(200).json(allBooks);
   } catch (err) {
     console.log("Error while fetching all books", err);
+  }
+});
+
+app.get("/filter/:type", async (req, res) => {
+  const { type } = req.params;
+  try {
+    const filteredBooks = await Book.find({ type: type });
+    res.status(200).json(filteredBooks);
+  } catch (err) {
+    console.log("Error while fetching filtered books", err);
   }
 });
 
