@@ -26,6 +26,17 @@ app.get("/all", async (req, res) => {
   }
 });
 
+app.get("/book/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const book = await Book.findById(id);
+    res.status(200).json(book);
+  } catch (err) {
+    console.log("Error while fetching book", err);
+  }
+});
+
+
 app.get("/filter/:type", async (req, res) => {
   const { type } = req.params;
   try {
