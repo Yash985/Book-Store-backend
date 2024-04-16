@@ -1,29 +1,13 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import { userSchema } from "./UserSchema/userSchema.js";
+import { bookSchema } from "./BookSchema/bookSchema.js";
 dotenv.config();
 
 const dbUrl = process.env.DB_URL;
 
-const bookSchema = mongoose.Schema({
-  title: {
-    type: String,
-    required: true,
-  },
-  desc: {
-    type: String,
-    required: true,
-  },
-  img_url: {
-    type: String,
-    required: true,
-  },
-  type: {
-    type: String,
-    required: true,
-  },
-});
-
 export const Book = mongoose.model("Book", bookSchema);
+export const User = mongoose.model("User", userSchema);
 
 export const connectToDb = () => {
   try {
